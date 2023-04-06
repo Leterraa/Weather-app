@@ -135,3 +135,9 @@ ul {
   flex: 0 0 auto;
   margin-right: 40px;
 }
+.open-source-link {
+  color: rgb(124, 113, 192);
+  text-decoration: underline;
+  font-size: 20px;
+  font-family: "Courier New", Courier, monospace;
+}
