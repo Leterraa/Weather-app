@@ -53,7 +53,9 @@ temp.addEventListener("click", () => {
 // Search for weather information
 
 function weatherInfo(response) {
-  document.querySelector("#city").innerHTML = `${response.data.name} Today:`;
+  document.querySelector(
+    "#city-name"
+  ).innerHTML = `${response.data.name} Today:`;
   document.querySelector(".temp strong").innerHTML = `${Math.round(
     response.data.main.temp
   )}°C`;
