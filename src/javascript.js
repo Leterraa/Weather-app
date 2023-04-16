@@ -22,30 +22,17 @@ let time = hour + ":" + minute;
 let dateTime = dayOfWeek + " " + time;
 document.getElementById("current-time").innerHTML = dateTime;
 
-//Searching form ????
-
-function search(event) {
-  event.preventDefault();
-  let cityElement = document.querySelector("#city-name");
-  let cityInput = document.querySelector("#city-input");
-  cityElement.innerHTML = cityInput.value + " Today:";
-}
-
-let searchButton = document.querySelector("#search-button");
-searchButton.addEventListener("click", search);
-
 //convert to farenheit
-let temp = document.querySelector(".temp");
-let tempValue = parseInt(temp.textContent);
-let tempUnit = temp.textContent.slice(-1);
-
+let temp = document.querySelector(".temp strong");
+let tempValueCelsius = null;
+let tempUnit = "C";
 temp.addEventListener("click", () => {
   if (tempUnit === "C") {
-    let tempF = Math.round((tempValue * 9) / 5 + 32);
-    temp.innerHTML = `<strong>${tempF}&deg;F</strong>`;
+    let tempF = Math.round((tempValueCelsius * 9) / 5 + 32);
+    temp.innerHTML = `<strong>${Math.round(tempF)}&deg;F</strong>`;
     tempUnit = "F";
   } else {
-    temp.innerHTML = `<strong>${tempValue}&deg;C</strong>`;
+    temp.innerHTML = `<strong>${Math.round(tempValueCelsius)}&deg;C</strong>`;
     tempUnit = "C";
   }
 });
