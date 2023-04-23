@@ -22,6 +22,55 @@ let time = hour + ":" + minute;
 let dateTime = dayOfWeek + " " + time;
 document.getElementById("current-time").innerHTML = dateTime;
 
+// Forecast (5 days)
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily.slice(0, 5); // only keep the first 5 days
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="week-container" id="week-group">
+  <div class="card-group">`;
+  forecast.forEach(function (forecastDay) {
+    forecastHTML =
+      forecastHTML +
+      `
+          <div class="card">
+            <div class="card-body">
+            <h5 class="weather-forecast-date">${formatDay(forecastDay.dt)}</h5>
+              <img 
+               src="http://openweathermap.org/img/wn/${
+                 forecastDay.weather[0].icon
+               }@2x.png"
+               class="card-img-top" 
+               alt="${forecastDay.weather[0].description}"
+              />
+              <span class="weather-forecast-temperature-max"> ${Math.round(
+                forecastDay.temp.max
+              )}°C</span>
+              <span class="weather-forecast-temperature-min">${Math.round(
+                forecastDay.temp.min
+              )}°C</span>
+            </div>
+          </div>
+        `;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "7784a4cd4aa2e0c25ead7bd96d585b8a";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
 //convert to farenheit
 let temp = document.querySelector(".temp strong");
 let tempValueCelsius = null;
@@ -67,6 +116,7 @@ function weatherInfo(response) {
   document.querySelector(
     ".weather-info .rainy"
   ).innerHTML = `${response.data.weather[0].description}`;
+    getForecast(response.data.coord);
 }
 
 // Search city
