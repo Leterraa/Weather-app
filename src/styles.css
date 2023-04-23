@@ -120,9 +120,10 @@ ul {
 
 .week-container {
   display: flex;
-  flex-wrap: nowrap;
   justify-content: space-between;
-  width: 900px;
+  width: 1015px;
+  padding: 15px;
+  box-sizing: border-box;
 }
 
 .card-group {
@@ -132,8 +133,29 @@ ul {
 }
 
 .card {
-  flex: 0 0 auto;
-  margin-right: 40px;
+  flex: 1 1 auto;
+  margin: 0 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card img {
+  display: block;
+  margin: 0px auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.card h5 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.card p {
+  margin: 10px 0;
 }
 .open-source-link {
   color: rgb(124, 113, 192);
